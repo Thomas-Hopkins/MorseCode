@@ -15,8 +15,7 @@ public class Menu {
 	public static void printMenu() {
 		System.out.println("What do you wish to do?");
 		System.out.println("1. Input a string for Morse Code encoding.");
-		System.out.println("2. Decode/Encode Morse Code from file.");
-		System.out.println("3. Exit.");
+		System.out.println("2. Exit.");
 	}
 	
 	/**

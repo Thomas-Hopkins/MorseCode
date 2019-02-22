@@ -2,14 +2,44 @@ package MorseTree;
 
 import Files.FileHandler;
 
-public class MorseCodeTree {
-	
-	public MorseCodeTree () {
+public class MorseCodeTree <T> {
+	protected class BTNode<T> {
+		public T data;
+	    public BTNode<T> left, right;
+	    public BTNode() {}  // Default constructor
+	    public BTNode(T theData) { data = theData; }
+	    public BTNode(T theData, BTNode<T> L, BTNode<T> R) {
+	        data = theData;
+	        left = L;
+	        right = R;
+	    }
 	}
 	
-	public void buildTree() {
-		FileHandler filehandler = new FileHandler();
-		
+	// Root node of the class
+	protected BTNode root;
+	
+	public MorseCodeTree () {
+		root = null;
+	}
+	
+	/**
+	 * Wrapper function for buildTree
+	 * @param morseString
+	 * @return
+	 */
+	public MorseCodeTree<String> buildTree(String[] morseString) {
+		return buildTree(morseString, 0);
+	}
+	
+	/**
+	 * Builds the binary tree from inputed morse code mapping
+	 * @param morseString
+	 * @param index
+	 * @return
+	 */
+	private MorseCodeTree<String> buildTree(String[] morseString, int index) {
+		// TODO: Build tree for morse code.
+		return null;
 	}
 	
 	public String decodeMessage(String message) {
@@ -22,22 +52,12 @@ public class MorseCodeTree {
 		return message;
 	}
 	
-	private boolean insert(BTNode root, T item) {
-		if (root.data.compareTo(item) > 0) { // if root is greater than item
-			if (root.left == null) { // if left branch empty insert there
-				root.left = new BTNode(item);
-				return true;
-			}
-			return insert(root.left, item); // go through again on with left node
-		}
-		if (root.data.compareTo(item) < 0) { // if root is less than item
-			if (root.right == null) { // if right branch empty insert there
-				root.right = new BTNode(item);
-				return true;
-			}
-			return insert(root.right, item); // if branch not empty try again on right root
-		}
-		return false;
+	@Override 
+	public String toString() {
+		String tree = root.data.toString() + " \n";
+		// TODO: Append right and left subtrees
+		return tree;
+		
 	}
 	
 }
