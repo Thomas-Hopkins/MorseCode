@@ -19,6 +19,10 @@ public class FileHandler {
 		FileInputStream inputFile = new FileInputStream(filename);
 		Scanner input = new Scanner(inputFile);
 		
+		
 		//TODO: read in from input and pass into a data structure which can be later converted to a binary tree
+		while(input.hasNext()) {
+			
+		}
 	}
 }
