@@ -33,7 +33,7 @@ public class FileHandler {
 		}
 		
 		//TODO: Remove debug
-		for (i = 0; i < data.length - 1; i++) {
+		for (i = 0; i < data.length; i++) {
 			System.out.println(data[i]);
 		}
 		return data;

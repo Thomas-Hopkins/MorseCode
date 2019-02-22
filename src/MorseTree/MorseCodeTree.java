@@ -18,8 +18,18 @@ public class MorseCodeTree <T> {
 	// Root node of the class
 	protected BTNode root;
 	
-	public MorseCodeTree () {
+	public MorseCodeTree() {
 		root = null;
+	}
+	
+	public MorseCodeTree(BTNode root) {
+		this.root = root;
+	}
+	
+	public MorseCodeTree(T rootValue, MorseCodeTree<T> left, MorseCodeTree<T> right) {
+		root = new BTNode(rootValue);
+		root.left = left.root;
+		root.right = right.root;
 	}
 	
 	/**
@@ -27,9 +37,10 @@ public class MorseCodeTree <T> {
 	 * @param morseString
 	 * @return
 	 */
-	public MorseCodeTree<String> buildTree(String[] morseString) {
+	public static MorseCodeTree<String> buildTree(String[] morseString) {
 		return buildTree(morseString, 0);
 	}
+	
 	
 	/**
 	 * Builds the binary tree from inputed morse code mapping
@@ -37,17 +48,24 @@ public class MorseCodeTree <T> {
 	 * @param index
 	 * @return
 	 */
-	private MorseCodeTree<String> buildTree(String[] morseString, int index) {
+	private static MorseCodeTree<String> buildTree(String[] morseString, int index) {
 		// TODO: Build tree for morse code.
+		String current = morseString[index].substring(1); // Get the morse code
+		for (int i = 0; i < current.length(); i++) { // iterate through morse code one by one
+			if (current.charAt(i) == '.') {
+				// 
+			}
+
+		}
 		return null;
 	}
 	
-	public String decodeMessage(String message) {
+	public static String decodeMessage(String message) {
 		// TODO: Decode message and return it using constructed binary tree
 		return message;
 	}
 	
-	public String encodeMessage(String message) {
+	public static String encodeMessage(String message) {
 		// TODO: Encode message in morse code using binary tree and return it.
 		return message;
 	}
