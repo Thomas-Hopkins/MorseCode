@@ -73,12 +73,12 @@ public class MorseCodeTree {
 	    return theTree;
 	}
 	
-	public static String decodeMessage(String message) {
+	public String decodeMessage(String message) {
 		// TODO: Decode message and return it using constructed binary tree
 		return message;
 	}
 	
-	public static String encodeMessage(String message) {
+	public String encodeMessage(String message) {
 		// TODO: Encode message in morse code using binary tree and return it.
 		return message;
 	}

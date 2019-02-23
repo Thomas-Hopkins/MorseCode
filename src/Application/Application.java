@@ -2,7 +2,6 @@ package Application;
 
 import java.io.IOException;
 
-import Files.FileHandler;
 import MorseTree.MorseCodeTree;
 
 public class Application {

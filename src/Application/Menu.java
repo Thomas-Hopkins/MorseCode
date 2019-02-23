@@ -53,13 +53,16 @@ public class Menu {
 	private static void decodeInput() {
 		System.out.println("Enter a string in morse code to decode: ");
 		String input = getInput();
-		System.out.println(MorseCodeTree.decodeMessage(input));
+		//System.out.println(MorseCodeTree.decodeMessage(input)); TODO: See encode comment
 	}
 	
 	private static void encodeInput() {
 		System.out.println("Enter a string to encode into morse code: ");
 		String input = getInput();
-		System.out.println(MorseCodeTree.encodeMessage(input));
+		//System.out.println(MorseCodeTree.encodeMessage(input)); TODO: Menu will need a reference to the tree.
+		// A static encode/decode method will not work because we need an instance of the tree to build it.
+		// Then we must use that instance to encode/decode. Unless we make the data attribute static as well, which
+		// static data members are generally considered bad practice.
 	}
 	
 	private static String getInput() {
