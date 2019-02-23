@@ -2,13 +2,13 @@ package MorseTree;
 
 import Files.FileHandler;
 
-public class MorseCodeTree <T> {
-	protected class BTNode<T> {
-		public T data;
-	    public BTNode<T> left, right;
+public class MorseCodeTree {
+	protected class BTNode {
+		public char data;
+	    public BTNode left, right;
 	    public BTNode() {}  // Default constructor
-	    public BTNode(T theData) { data = theData; }
-	    public BTNode(T theData, BTNode<T> L, BTNode<T> R) {
+	    public BTNode(char theData) { data = theData; }
+	    public BTNode(char theData, BTNode L, BTNode R) {
 	        data = theData;
 	        left = L;
 	        right = R;
@@ -26,56 +26,29 @@ public class MorseCodeTree <T> {
 		this.root = root;
 	}
 	
-	public MorseCodeTree(T rootValue, MorseCodeTree<T> left, MorseCodeTree<T> right) {
+	public MorseCodeTree(char rootValue, MorseCodeTree left, MorseCodeTree right) {
 		root = new BTNode(rootValue);
 		root.left = left.root;
 		root.right = right.root;
 	}
 	
-	/**
-	 * Wrapper function for buildTree
-	 * @param morseString
-	 * @return
-	 */
-	public static MorseCodeTree<String> buildTree(String[] morseString) {
-		return buildTree(morseString, 0);
-	}
 	
 	
-	/**
-	 * Builds the binary tree from inputed morse code mapping
-	 * @param morseString
-	 * @param index
-	 * @return
-	 */
-	private static MorseCodeTree<String> buildTree(String[] morseString, int index) {
-		// TODO: Build tree for morse code.
-		String current = morseString[index].substring(1); // Get the morse code
-		for (int i = 0; i < current.length(); i++) { // iterate through morse code one by one
-			if (current.charAt(i) == '.') {
-				// 
-			}
-
-		}
-		return null;
-	}
-	
-	public static String decodeMessage(String message) {
+	public String decodeMessage(String message) {
 		// TODO: Decode message and return it using constructed binary tree
 		return message;
 	}
 	
-	public static String encodeMessage(String message) {
+	public String encodeMessage(String message) {
 		// TODO: Encode message in morse code using binary tree and return it.
 		return message;
 	}
 	
 	@Override 
 	public String toString() {
-		String tree = root.data.toString() + " \n";
-		// TODO: Append right and left subtrees
-		return tree;
-		
+		// We should just print some value using one of the traversal methods as a helper function
+	    // to build a string
+	    return null;
 	}
 	
 }
