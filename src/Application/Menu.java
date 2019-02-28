@@ -6,11 +6,13 @@ import MorseTree.MorseCodeTree;
 
 public class Menu {
 	public boolean running;
+	private static MorseCodeTree morseTree;
 	
 	/** 
 	 * Constructor
 	 */
-	public Menu() {
+	public Menu(MorseCodeTree tree) {
+		morseTree = tree;
 		running = true;
 	}
 	/**
@@ -53,7 +55,7 @@ public class Menu {
 	private static void decodeInput() {
 		System.out.println("Enter a string in morse code to decode: ");
 		String input = getInput();
-		//System.out.println(MorseCodeTree.decodeMessage(input)); TODO: See encode comment
+		System.out.println(morseTree.decodeMessage(input));
 	}
 	
 	private static void encodeInput() {
@@ -67,7 +69,7 @@ public class Menu {
 	
 	private static String getInput() {
 		Scanner scnr = new Scanner(System.in);
-		String userInput = scnr.next();
+		String userInput = scnr.nextLine();
 		scnr.close();
 		return userInput;
 	}

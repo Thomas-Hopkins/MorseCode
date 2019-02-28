@@ -74,8 +74,23 @@ public class MorseCodeTree {
 	}
 	
 	public String decodeMessage(String message) {
-		// TODO: Decode message and return it using constructed binary tree
-		return message;
+		String decodedMsg = "";
+		BTNode localRoot = root, prevNode = root;
+		for(int i = 0; i < message.length(); i++) { // Iterate through the string
+			prevNode = localRoot; // Get previous node 
+			if(message.charAt(i) == '.') { // if a dot then advance on left branch
+				localRoot = localRoot.left;
+			}
+			if(message.charAt(i) == '-') { // if a dash then advance on right branch
+				localRoot = localRoot.right;
+			}
+			if(message.charAt(i) == ' ') { // if a space then add previous character and start
+				decodedMsg += prevNode.data; // binary morse code tree from beginning 
+				localRoot = root;
+			}
+		}
+		decodedMsg += localRoot.data; // string does not have ending space, so add last element
+		return decodedMsg;
 	}
 	
 	public String encodeMessage(String message) {
