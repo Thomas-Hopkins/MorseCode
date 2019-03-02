@@ -20,6 +20,7 @@ public class MorseCodeTree {
 	// Root node of the class
 	protected BTNode root;
 	
+	// CONSTRUCTORS // 
 	public MorseCodeTree() {
 		root = null;
 	}
@@ -108,22 +109,24 @@ public class MorseCodeTree {
 		// TODO: FIX THIS METHOD. Returns .... for any value beyond ....
 		String encodedMsg = "";
 		BTNode localRoot = root;
-		for(int i = 0; i < message.length(); i++) {
-			encodedMsg += encodeMessage(message.charAt(i), localRoot, "");
-			encodedMsg += " ";
+		for(int i = 0; i < message.length(); i++) { // Iterate through string one character at a time
+			encodedMsg += encodeMessage(message.charAt(i), localRoot, ""); // Run character through encoder
+			encodedMsg += " "; // Add a space at the end of the encoded character
 		}
 		return encodedMsg;
 	}
 	
 	private String encodeMessage(char character, BTNode root, String morse) {
-		if(character == root.data) {
+		if(character == root.data) { // If character is equal to the root then return that path
 			return morse;
 		}
 		else {
 			if(root.left != null) {
+				// Go through left branch
 				return encodeMessage(character, root.left, morse + ".");
 			}
 			if(root.right != null) {
+				// Go through right branch
 				return encodeMessage(character, root.right, morse + "-");
 			}
 			return morse;

@@ -27,6 +27,10 @@ public class Menu {
 		System.out.println("3. Exit.");
 	}
 	
+	/**
+	 * Calls printMenu and gets input for choice, passes to peformMenuAction
+	 * @return int corresponding with success status -1 is an error, 1 is quit, 0 is success 
+	 */
 	public int promptAction() {
 		printMenu();
 		System.out.print(">>> ");
@@ -46,12 +50,15 @@ public class Menu {
 	private int performMenuAction(int option) {
 		switch(option) {
 		case 1: 
+			// Encode choice.
 			encodeInput();
 			return 0;
 		case 2: 
+			// Decode choice
 			decodeInput();
 			return 0;
 		case 3:
+			// Exit condition
 			running = false;
 			scnr.close();
 			return 1;
@@ -59,6 +66,9 @@ public class Menu {
 		return -1;
 	}
 	
+	/**
+	 * Gets user's morse code input and decodes it.
+	 */
 	private void decodeInput() {
 		System.out.println("Enter a string in morse code to decode: ");
 		String input = getInput();
@@ -66,6 +76,9 @@ public class Menu {
 		System.out.println();
 	}
 	
+	/**
+	 * Gets user's string input and encodes it.
+	 */
 	private void encodeInput() {
 		System.out.println("Enter a string to encode into morse code: ");
 		String input = getInput();
@@ -73,6 +86,10 @@ public class Menu {
 		System.out.println();
 	}
 	
+	/**
+	 * Gets user string input 
+	 * @return
+	 */
 	private String getInput() {
 		if(scnr.hasNext()) {
 			return scnr.next();
