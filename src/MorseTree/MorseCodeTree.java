@@ -2,6 +2,8 @@ package MorseTree;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class MorseCodeTree {
@@ -98,41 +100,73 @@ public class MorseCodeTree {
 		decodedMsg += localRoot.data; // string does not have ending space, so add last element
 		return decodedMsg;
 	}
-	
+
 	/**
-	 * Wrapper function for encoding a message
-	 * @param message
-	 * @return
+	 * Takes a String argument and returns the Morse Code representation of the given String.
+	 * @param message String The message to encode
+	 * @return String The Morse Code representation of the given String
 	 */
 	public String encodeMessage(String message) {
-		System.out.println("Fix method.");
-		// TODO: FIX THIS METHOD. Returns .... for any value beyond ....
-		String encodedMsg = "";
-		BTNode localRoot = root;
-		for(int i = 0; i < message.length(); i++) { // Iterate through string one character at a time
-			encodedMsg += encodeMessage(message.charAt(i), localRoot, ""); // Run character through encoder
-			encodedMsg += " "; // Add a space at the end of the encoded character
-		}
-		return encodedMsg;
+	    message = message.toLowerCase(); // Set message to lower case for encoding
+        StringBuilder encodedMessage = new StringBuilder();
+        char letter;
+        String encodedLetter;
+        
+        for(int i = 0; i < message.length() - 1; i++) { // Encode each character in the String.
+            letter = message.charAt(i);
+            encodedLetter = encodeLetter(root, letter);
+            encodedMessage.append(encodedLetter + " "); // Append to the StringBuilder, with a space in between.
+        }
+        encodedMessage.append(encodeLetter(root, message.charAt(message.length() - 1)));
+        
+        return encodedMessage.toString();
 	}
 	
-	private String encodeMessage(char character, BTNode root, String morse) {
-		if(character == root.data) { // If character is equal to the root then return that path
-			return morse;
-		}
-		else {
-			if(root.left != null) {
-				// Go through left branch
-				return encodeMessage(character, root.left, morse + ".");
-			}
-			if(root.right != null) {
-				// Go through right branch
-				return encodeMessage(character, root.right, morse + "-");
-			}
-			return morse;
-		}
-		
-	}
+	/**
+	 * Takes in a char value and returns a String representing the
+	 * Morse value of the given char.
+	 * @param root BTNode The root of the MorseCodeTree
+	 * @param letter char The letter to encode
+	 * @return String The morse value representing the letter
+	 */
+	private String encodeLetter(BTNode root, char letter) {
+	    // Method-local inner class for storing a node and string within the Queue
+        class Pair {
+            public final BTNode node;
+            public final String morseString;
+            public Pair(BTNode node, String morseString) { 
+                this.node = node;
+                this.morseString = morseString;
+            }
+        }
+        Pair nodeMorsePair;
+        BTNode curNode;
+        String curMorseString;
+        Queue<Pair> queue = new LinkedList<Pair>();
+        
+        queue.add(new Pair(root, "")); // Add root with empty string to start off queue.
+        
+        while(!queue.isEmpty()) { // If queue is empty, we've searched the entire tree.
+            nodeMorsePair = queue.poll();
+            curNode = nodeMorsePair.node;
+            curMorseString = nodeMorsePair.morseString;
+            
+            if(curNode.data != letter) {
+                if(curNode.left != null) {
+                    // Add left to queue and add the previous morse string + "."
+                    queue.add(new Pair(curNode.left, curMorseString + ".")); 
+                }
+                if(curNode.right != null) {
+                    // Add right to queue and add the previous morse string + "-"
+                    queue.add(new Pair(curNode.right, curMorseString + "-"));
+                }
+            } else {
+                return curMorseString; // Character found, return the current morse string associated with the current pair.
+            }
+        }
+        
+        return String.valueOf(letter); // Character not found in tree.
+    }
 	
 	/**
 	 * Takes a StringBuilder object and formulates a string representation
