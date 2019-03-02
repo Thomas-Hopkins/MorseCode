@@ -35,7 +35,7 @@ public class MorseCodeTree {
 	}
 	
 	/**
-	 * 
+	 * Builds the morse code binary tree for decoding and encoding messages.
 	 * @param fileName Name of the input file
 	 * @return The MorseCodeTree filled with the data from file
 	 * @throws IOException
@@ -73,6 +73,11 @@ public class MorseCodeTree {
 	    return theTree;
 	}
 	
+	/**
+	 * Decodes a message from morse code into alpha-numerical characters.
+	 * @param Morse code string space delimiter separates characters
+	 * @return Decoded message string
+	 */
 	public String decodeMessage(String message) {
 		String decodedMsg = "";
 		BTNode localRoot = root, prevNode = root;
@@ -93,9 +98,37 @@ public class MorseCodeTree {
 		return decodedMsg;
 	}
 	
+	/**
+	 * Wrapper function for encoding a message
+	 * @param message
+	 * @return
+	 */
 	public String encodeMessage(String message) {
-		// TODO: Encode message in morse code using binary tree and return it.
-		return message;
+		System.out.println("Fix method.");
+		// TODO: FIX THIS METHOD. Returns .... for any value beyond ....
+		String encodedMsg = "";
+		BTNode localRoot = root;
+		for(int i = 0; i < message.length(); i++) {
+			encodedMsg += encodeMessage(message.charAt(i), localRoot, "");
+			encodedMsg += " ";
+		}
+		return encodedMsg;
+	}
+	
+	private String encodeMessage(char character, BTNode root, String morse) {
+		if(character == root.data) {
+			return morse;
+		}
+		else {
+			if(root.left != null) {
+				return encodeMessage(character, root.left, morse + ".");
+			}
+			if(root.right != null) {
+				return encodeMessage(character, root.right, morse + "-");
+			}
+			return morse;
+		}
+		
 	}
 	
 	/**

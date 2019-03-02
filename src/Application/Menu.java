@@ -6,7 +6,8 @@ import MorseTree.MorseCodeTree;
 
 public class Menu {
 	public boolean running;
-	private static MorseCodeTree morseTree;
+	private Scanner scnr;
+	private MorseCodeTree morseTree;
 	
 	/** 
 	 * Constructor
@@ -14,23 +15,27 @@ public class Menu {
 	public Menu(MorseCodeTree tree) {
 		morseTree = tree;
 		running = true;
+		scnr = new Scanner(System.in);
 	}
 	/**
 	 * Print out the menu options to console.
 	 */
-	public static void printMenu() {
+	private void printMenu() {
 		System.out.println("What do you wish to do?");
 		System.out.println("1. Input a string for Morse Code encoding.");
 		System.out.println("2. Input morse code string for decoding.");
 		System.out.println("3. Exit.");
 	}
 	
-	public static void promptAction() {
-		Scanner scnr = new Scanner(System.in);
-		int status = 0;
+	public int promptAction() {
 		printMenu();
 		System.out.print(">>> ");
-		performMenuAction(scnr.nextInt());
+		if(scnr.hasNextInt()) {
+			return performMenuAction(scnr.nextInt());
+		}
+		else {
+			return -1;
+		}
 	}
 	
 	/**
@@ -38,7 +43,7 @@ public class Menu {
 	 * @param option
 	 * @return 0 not exit 1 if exit
 	 */
-	private static int performMenuAction(int option) {
+	private int performMenuAction(int option) {
 		switch(option) {
 		case 1: 
 			encodeInput();
@@ -47,31 +52,34 @@ public class Menu {
 			decodeInput();
 			return 0;
 		case 3:
+			running = false;
+			scnr.close();
 			return 1;
 		}
 		return -1;
 	}
 	
-	private static void decodeInput() {
+	private void decodeInput() {
 		System.out.println("Enter a string in morse code to decode: ");
 		String input = getInput();
 		System.out.println(morseTree.decodeMessage(input));
+		System.out.println();
 	}
 	
-	private static void encodeInput() {
+	private void encodeInput() {
 		System.out.println("Enter a string to encode into morse code: ");
 		String input = getInput();
-		//System.out.println(MorseCodeTree.encodeMessage(input)); TODO: Menu will need a reference to the tree.
-		// A static encode/decode method will not work because we need an instance of the tree to build it.
-		// Then we must use that instance to encode/decode. Unless we make the data attribute static as well, which
-		// static data members are generally considered bad practice.
+		System.out.println(morseTree.encodeMessage(input));
+		System.out.println();
 	}
 	
-	private static String getInput() {
-		Scanner scnr = new Scanner(System.in);
-		String userInput = scnr.nextLine();
-		scnr.close();
-		return userInput;
+	private String getInput() {
+		if(scnr.hasNext()) {
+			return scnr.next();
+		}
+		else {
+			return "";
+		}
 	}
 	
 }
