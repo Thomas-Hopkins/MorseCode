@@ -38,6 +38,7 @@ public class Menu {
 			return performMenuAction(scnr.nextInt());
 		}
 		else {
+			scnr.next();
 			return -1;
 		}
 	}
@@ -98,5 +99,4 @@ public class Menu {
 			return "";
 		}
 	}
-	
 }

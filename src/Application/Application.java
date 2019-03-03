@@ -11,8 +11,15 @@ public class Application {
 	    Menu appMenu = new Menu(morseCodeTree);
 	    
 	    // Main loop
+	    int status;
 	    while(appMenu.running) {
-	    	appMenu.promptAction();
+	    	status = appMenu.promptAction();
+	    	if(status < 0) {
+	    		System.out.println("INVALID INPUT.\n");
+	    	}
+	    	else if (status > 0) {
+	    		System.out.println("Goodbye.");
+	    	}
 	    }
 	}
 }
