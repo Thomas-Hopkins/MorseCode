@@ -82,8 +82,8 @@ public class Menu {
 	}
 	
 	/**
-	 * Gets user string input 
-	 * @return
+	 * Gets user input for menu options
+	 * @return int The option to execute
 	 */
 	private int getInput() {
 		if(scnr.hasNextInt()) {
