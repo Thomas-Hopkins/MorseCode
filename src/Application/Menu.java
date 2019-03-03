@@ -34,13 +34,7 @@ public class Menu {
 	public int promptAction() {
 		printMenu();
 		System.out.print(">>> ");
-		if(scnr.hasNextInt()) {
-			return performMenuAction(scnr.nextInt());
-		}
-		else {
-			scnr.next();
-			return -1;
-		}
+		return performMenuAction(getInput());
 	}
 	
 	/**
@@ -72,7 +66,7 @@ public class Menu {
 	 */
 	private void decodeInput() {
 		System.out.println("Enter a string in morse code to decode: ");
-		String input = getInput();
+		String input = scnr.nextLine();
 		System.out.println(morseTree.decodeMessage(input));
 		System.out.println();
 	}
@@ -82,7 +76,7 @@ public class Menu {
 	 */
 	private void encodeInput() {
 		System.out.println("Enter a string to encode into morse code: ");
-		String input = getInput();
+		String input = scnr.nextLine();
 		System.out.println(morseTree.encodeMessage(input));
 		System.out.println();
 	}
@@ -91,12 +85,15 @@ public class Menu {
 	 * Gets user string input 
 	 * @return
 	 */
-	private String getInput() {
-		if(scnr.hasNext()) {
-			return scnr.next();
+	private int getInput() {
+		if(scnr.hasNextInt()) {
+			int userInput = scnr.nextInt();
+			scnr.nextLine();
+			return userInput;
 		}
 		else {
-			return "";
+		    scnr.nextLine();
+			return -1;
 		}
 	}
 }
