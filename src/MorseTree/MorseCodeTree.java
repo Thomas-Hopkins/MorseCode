@@ -110,6 +110,7 @@ public class MorseCodeTree {
 	 * @return String The Morse Code representation of the given String
 	 */
 	public String encodeMessage(String message) {
+	    if(message.length() == 0) { return ""; }
 	    message = message.toLowerCase(); // Set message to lower case for encoding
         StringBuilder encodedMessage = new StringBuilder();
         char letter;
