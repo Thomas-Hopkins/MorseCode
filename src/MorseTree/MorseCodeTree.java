@@ -83,9 +83,8 @@ public class MorseCodeTree {
 	 */
 	public String decodeMessage(String message) {
 		String decodedMsg = "";
-		BTNode localRoot = root, prevNode = root;
+		BTNode localRoot = root;
 		for(int i = 0; i < message.length(); i++) { // Iterate through the string
-			prevNode = localRoot; // Get previous node 
 			if(message.charAt(i) == '.') { // if a dot then advance on left branch
 				localRoot = localRoot.left;
 			}
@@ -93,11 +92,15 @@ public class MorseCodeTree {
 				localRoot = localRoot.right;
 			}
 			if(message.charAt(i) == ' ') { // if a space then add previous character and start
-				decodedMsg += prevNode.data; // binary morse code tree from beginning 
-				localRoot = root;
+			    if(localRoot != null) {
+    				decodedMsg += localRoot.data; // binary morse code tree from beginning
+    				localRoot = root;
+			    } else { return "Could not parse input."; }
 			}
 		}
-		decodedMsg += localRoot.data; // string does not have ending space, so add last element
+		if(localRoot != null) { decodedMsg += localRoot.data; }// string does not have ending space, so add last element
+		else { return "Could not parse input."; }
+		
 		return decodedMsg;
 	}
 
